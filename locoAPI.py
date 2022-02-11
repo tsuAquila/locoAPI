@@ -14,40 +14,69 @@ def loco(streamerID):
   followers = response["data"]["followersViews"][24]
   views = response["data"]["followersViews"][26]
   live = response["data"]["live"][0]
-  live1 = live[21:]
+  live3 = live[0:21]
   
-  if live1 != "This streamer isn’t live right nowCheck out the streamer’s top videos instead!" :
-    live2 = join(live1.split("}")[:-1]) + "}"
-    liveDict = json.loads(live2)
-    liveStatus = True
-    streamURL = liveDict['contentUrl']
-    streamTitle = liveDict["name"]
-    thumbnailURL = liveDict["thumbnailUrl"]
-    streamDesc = liveDict['description']
-    streamDateTime = liveDict['uploadDate']
-    locoJSON = {
-      "streamerID" : streamerID ,
-      "streamerName" : streamer ,
-      "followers" : followers ,
-      "views" : views ,
-      "liveStatus" : liveStatus ,
-      "streamDetails" : {"streamURL" : streamURL , "streamTitle" : streamTitle , "thumbnailURL" : thumbnailURL , "streamDesc" : streamDesc , "streamDateTime" : streamDateTime }
-    }
+  if live3 == "livevideosleaderboard" :
+    live1 = live[21:]
+    
+    if live1 != "This streamer isn’t live right nowCheck out the streamer’s top videos instead!" :
+      live2 = join(live1.split("}")[:-1]) + "}"
+      liveDict = json.loads(live2)
+      liveStatus = True
+      streamURL = liveDict['contentUrl']
+      streamTitle = liveDict["name"]
+      thumbnailURL = liveDict["thumbnailUrl"]
+      streamDesc = liveDict['description']
+      streamDateTime = liveDict['uploadDate']
+      locoJSON = {
+        "streamerID" : streamerID ,
+        "streamerName" : streamer ,
+        "followers" : followers ,
+        "views" : views ,
+        "liveStatus" : liveStatus ,
+        "streamDetails" : {"streamURL" : streamURL , "streamTitle" : streamTitle , "thumbnailURL" : thumbnailURL , "streamDesc" : streamDesc , "streamDateTime" : streamDateTime }
+      }
 
+    else :
+      liveStatus = False
+      locoJSON = {
+        "streamerID" : streamerID ,
+        "streamerName" : streamer ,
+        "followers" : followers ,
+        "views" : views ,
+        "liveStatus" : liveStatus
+      }
+  
   else :
-    liveStatus = False
-    streamURL = None
-    streamTitle = None
-    thumbnailURL = None
-    streamDesc = None
-    streamDateTime = None
-    locoJSON = {
-      "streamerID" : streamerID ,
-      "streamerName" : streamer ,
-      "followers" : followers ,
-      "views" : views ,
-      "liveStatus" : liveStatus
-    }
+    live1 = live[10:]
+    
+    if live1 != "This streamer isn’t live right nowCheck out the streamer’s top videos instead!" :
+      live2 = "}".join(live1.split("}")[:-1]) + "}"
+      liveDict = json.loads(live2)
+      liveStatus = True
+      streamURL = liveDict['contentUrl']
+      streamTitle = liveDict["name"]
+      thumbnailURL = liveDict["thumbnailUrl"]
+      streamDesc = liveDict['description']
+      streamDateTime = liveDict['uploadDate']
+      locoJSON = {
+        "streamerID" : streamerID ,
+        "streamerName" : streamer ,
+        "followers" : followers ,
+        "views" : views ,
+        "liveStatus" : liveStatus ,
+        "streamDetails" : {"streamURL" : streamURL , "streamTitle" : streamTitle , "thumbnailURL" : thumbnailURL , "streamDesc" : streamDesc , "streamDateTime" : streamDateTime }
+      }
+
+    else :
+      liveStatus = False
+      locoJSON = {
+        "streamerID" : streamerID ,
+        "streamerName" : streamer ,
+        "followers" : followers ,
+        "views" : views ,
+        "liveStatus" : liveStatus
+      }
 
   return (locoJSON)
 

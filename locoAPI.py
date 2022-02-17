@@ -1,5 +1,6 @@
 import requests
 import json
+from time import time, sleep
 
 streamerID = input("Enter the StreamerID: ")
 
@@ -79,5 +80,6 @@ def loco(streamerID):
       }
 
   return (locoJSON)
-
-print(loco(streamerID))
+while True:
+  sleep(120 - time() % 120)
+  print(loco(streamerID))

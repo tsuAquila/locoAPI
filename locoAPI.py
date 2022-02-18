@@ -21,7 +21,7 @@ def loco(streamerID):
     live1 = live[21:]
     
     if live1 != "This streamer isn’t live right nowCheck out the streamer’s top videos instead!" :
-      live3 = join(live1.split("}")[:-1]) + "}"
+      live3 = "}".join(live1.split("}")[:-1]) + "}"
       liveDict = json.loads(live3)
       liveStatus = True
       streamURL = liveDict['contentUrl']

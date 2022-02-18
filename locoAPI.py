@@ -4,7 +4,7 @@ from time import time, sleep
 
 streamerID = input("Enter the StreamerID: ")
 
-def loco(streamerID):
+def stream(streamerID):
   response = requests.post("https://wrapapi.com/use/tsuAquila/locoapi/streamers/0.1.0", json={
   "streamerName": streamerID,
   "wrapAPIKey": "Lwk29zg2OOVXF4nps448ObemSIfTUqtu"
@@ -84,4 +84,4 @@ def loco(streamerID):
 
 while True:
   sleep(60 - time() % 60)
-  loco(streamerID)
+  stream(streamerID)

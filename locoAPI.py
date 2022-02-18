@@ -78,8 +78,10 @@ def loco(streamerID):
         "views" : views ,
         "liveStatus" : liveStatus
       }
+  with open('locoJSON.json', 'w') as file:
+    json.dump(locoJSON, file)
+    print("Updated json file at " + streamDateTime)
 
-  return (locoJSON)
 while True:
-  sleep(120 - time() % 120)
-  print(loco(streamerID))
+  sleep(60 - time() % 60)
+  loco(streamerID)
